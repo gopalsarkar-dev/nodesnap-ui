@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Menu from "../profilemenu/Menu";
 
 const TopBar = () => {
 	return (
@@ -10,7 +11,7 @@ const TopBar = () => {
 					NodeSnap
 				</Link>
 
-				<div className="">ProfileMenu</div>
+				<Menu />
 			</div>
 		</header>
 	);
