@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "bradlc.vscode-tailwindcss",
+    "PKief.material-icon-theme",
+    "esbenp.prettier-vscode",
+    "ms-vscode.js-debug",
+    "usernamehw.errorlens",
+    "PulkitGangwar.nextjs-snippets",
+    "ms-vscode.js-debug-companion"
+  ]
+}
