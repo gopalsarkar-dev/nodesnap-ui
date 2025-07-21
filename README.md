@@ -4,11 +4,11 @@ NodeSnap-UI is a modern and responsive frontend user interface for the NodeSnap 
 
 📈 Project Status
 
-🛩️ ** Currently 8% completed **
+🛩️ ** Currently 12% completed **
 
 📦 Basic dependencies installed ( ShadCN/UI, Ky, prettier-plugin-tailwindcss, rimraf etc.)
-
-✅ Removed unnecessary/unused code and files for a cleaner, faster codebase
+✅ Removed unnecessary/unused code and files for a cleaner, faster codebase.
+↗️ TopBar / NavBar completed.
 
 ## Getting Started
 
