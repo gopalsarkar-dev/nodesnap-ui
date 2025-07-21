@@ -1,17 +1,21 @@
+import TopBar from "@/components/Header/TopBar";
 import "./globals.css";
 
 type RootLayoutPropsProvider = {
-  children: React.ReactNode;
+	children: React.ReactNode;
 };
 
 const RootLayout = ({ children }: RootLayoutPropsProvider) => {
-  return (
-    <html lang="en">
-      <body>
-        <main className="">{children}</main>
-      </body>
-    </html>
-  );
+	return (
+		<html lang="en">
+			<body>
+				<TopBar />
+				<main className="container mx-auto mt-24 max-w-2xl px-6">
+					{children}
+				</main>
+			</body>
+		</html>
+	);
 };
 
 export default RootLayout;
