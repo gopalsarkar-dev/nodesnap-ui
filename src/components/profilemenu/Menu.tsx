@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -29,7 +30,9 @@ const Menu = () => {
 					<DropdownMenuSeparator />
 					<DropdownMenuGroup>
 						<DropdownMenuItem className="cursor-pointer">
-							<h1>Profile</h1>
+							<Link href="/profile">
+								<h1>Profile</h1>
+							</Link>
 							{/* <ProfileUser /> */}
 						</DropdownMenuItem>
 
