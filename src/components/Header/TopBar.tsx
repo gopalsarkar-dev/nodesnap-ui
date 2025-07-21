@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { GoHome } from "react-icons/go";
+import PostDrawer from "../post/PostDrawer";
 import Menu from "../profilemenu/Menu";
 
 const TopBar = () => {
@@ -10,8 +12,14 @@ const TopBar = () => {
 					className="text-2xl font-bold">
 					NodeSnap
 				</Link>
+				<div className="flex items-center justify-center gap-5 sm:gap-8">
+					<Link href="/">
+						<GoHome size={26} />
+					</Link>
 
-				<Menu />
+					<PostDrawer />
+					<Menu />
+				</div>
 			</div>
 		</header>
 	);
