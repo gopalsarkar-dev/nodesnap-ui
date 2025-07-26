@@ -1,7 +1,6 @@
-import { User } from "lucide-react";
 import Image from "next/image";
-import { Button } from "../ui/button";
 import { Card, CardHeader, CardTitle } from "../ui/card";
+import EditProfileDrawer from "./EditProfileDrawer";
 
 const UserProfile = () => {
 	return (
@@ -24,9 +23,7 @@ const UserProfile = () => {
 								with Directus, Prisma, and real-time technologies.
 							</div>
 							<div className="flex">
-								<Button>
-									Edit Profile <User />
-								</Button>
+								<EditProfileDrawer />
 							</div>
 						</div>
 					</CardTitle>
