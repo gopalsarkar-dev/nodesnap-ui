@@ -1,18 +1,18 @@
 "use client";
 import { User } from "lucide-react";
+import { IoCloseOutline } from "react-icons/io5";
 import { Button } from "../ui/button";
 import {
 	Drawer,
 	DrawerClose,
 	DrawerContent,
 	DrawerDescription,
-	DrawerFooter,
 	DrawerHeader,
 	DrawerTitle,
 	DrawerTrigger,
 } from "../ui/drawer";
+import EditProfileAvater from "./EditProfileAvater";
 import ProfileAccountForm from "./ProfileAccountForm";
-import { IoCloseOutline } from "react-icons/io5";
 
 const EditProfileDrawer = () => {
 	return (
@@ -25,25 +25,34 @@ const EditProfileDrawer = () => {
 						Edit Profile <User />
 					</Button>
 				</DrawerTrigger>
-				<DrawerContent className="container mx-auto grid max-w-2xl px-6">
-					<DrawerHeader className="">
-						<DrawerTitle className="flex items-center justify-between text-lg">
-							Edit profile account
+				<DrawerContent className="container mx-auto max-w-2xl">
+					<DrawerHeader className="hidden">
+						<DrawerTitle></DrawerTitle>
+						<DrawerDescription className="hidden"></DrawerDescription>
+					</DrawerHeader>
+
+					<div className="flex max-h-[85vh] flex-col space-y-5">
+						<div className="flex items-center justify-between px-6">
+							<div className="text-lg font-bold">Edit profile account</div>
 							<DrawerClose asChild>
 								<Button
 									className="cursor-pointer"
-									variant={"outline"}
-									size={"icon"}>
+									variant="outline"
+									size="icon">
 									<IoCloseOutline />
 								</Button>
 							</DrawerClose>
-						</DrawerTitle>
-						<DrawerDescription className="hidden"></DrawerDescription>
-					</DrawerHeader>
-					{/* profileAccountForm  from profile folder*/}
-					<ProfileAccountForm />
+						</div>
 
-					<DrawerFooter></DrawerFooter>
+						<div className="space-y-5 overflow-y-auto px-6">
+							<ProfileAccountForm />
+							<div className="text-lg font-bold">Edit Profile Avater</div>
+							<div className="grid place-items-center pb-24">
+								<EditProfileAvater />
+							</div>
+						</div>
+					</div>
+					{/* <DrawerFooter className="pb-10"></DrawerFooter> */}
 				</DrawerContent>
 			</Drawer>
 		</>
