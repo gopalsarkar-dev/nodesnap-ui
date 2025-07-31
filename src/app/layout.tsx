@@ -17,7 +17,7 @@ const RootLayout = ({ children }: RootLayoutPropsProvider) => {
 					defaultTheme="light"
 					enableSystem={false}>
 					<TopBar />
-					<main className="container mx-auto mt-24 max-w-2xl px-6">
+					<main className="container mx-auto max-w-2xl px-6 py-8">
 						{children}
 					</main>
 				</ThemeProvider>
