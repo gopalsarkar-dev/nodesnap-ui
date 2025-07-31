@@ -12,7 +12,7 @@ const DarkMode = () => {
 	return (
 		<>
 			<div
-				className="cursor-pointer font-bold"
+				className="cursor-pointer font-semibold"
 				onClick={handelDarkmodeFn}>
 				{theme === "light" ? (
 					<div className="flex items-center gap-2">
