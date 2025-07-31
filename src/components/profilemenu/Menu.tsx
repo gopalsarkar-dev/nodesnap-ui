@@ -12,6 +12,7 @@ import {
 } from "../ui/dropdown-menu";
 import DarkMode from "../theme/DarkMode";
 import { User } from "lucide-react";
+import UserLogout from "../logout/UserLogout";
 
 const Menu = () => {
 	return (
@@ -46,9 +47,8 @@ const Menu = () => {
 					</DropdownMenuGroup>
 					<DropdownMenuSeparator />
 
-					<DropdownMenuItem className="cursor-pointer">
-						<h1>LogOutBtn</h1>
-						{/* <LogoutButton /> */}
+					<DropdownMenuItem>
+						<UserLogout />
 					</DropdownMenuItem>
 				</DropdownMenuContent>
 			</DropdownMenu>
