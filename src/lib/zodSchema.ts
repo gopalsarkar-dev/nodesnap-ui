@@ -33,3 +33,7 @@ export const editProfileSchema = z.object({
 	description: z.optional(z.string()),
 	tags: z.optional(z.string()),
 });
+
+export const userPostSchema = z.object({
+	post_title: z.optional(z.string()),
+});
