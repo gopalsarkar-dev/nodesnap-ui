@@ -4,7 +4,7 @@ NodeSnap-UI is a modern and responsive frontend user interface for the NodeSnap 
 
 ## 📈 Project Status (Frontend Part)
 
-🛩️ ** Currently 42% completed **
+🛩️ ** Currently 48% completed **
 
 📦 Basic dependencies installed ( ShadCN/UI, Ky, prettier-plugin-tailwindcss, rimraf etc.)
 
@@ -30,6 +30,14 @@ NodeSnap-UI is a modern and responsive frontend user interface for the NodeSnap 
 ## 📰 FeedCard:
 
 ✅ FeedCard component displays all user posts.
+
+## 📝 User Posts
+
+✅ Users can create posts with a title and image upload functionality.
+
+## 🧿 Favicon
+
+✅ Custom favicon.ico added.
 
 ## Getting Started
 
