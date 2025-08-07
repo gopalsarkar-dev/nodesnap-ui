@@ -2,9 +2,9 @@
 
 NodeSnap-UI is a modern and responsive frontend user interface for the NodeSnap backend (powered by Directus). It enables users to interact seamlessly with backend services such as file uploads, authentication, UserProfile, etc. Built with Next.js, Tailwind CSS and ShadcnUi
 
-## 📈 Project Status (Frontend Part)
+## 📈 Project Status ( Frontend Part – Basically Completed )
 
-🛩️ ** Currently 48% completed **
+🛩️ ** Currently 50% completed **
 
 📦 Basic dependencies installed ( ShadCN/UI, Ky, prettier-plugin-tailwindcss, rimraf etc.)
 
@@ -38,6 +38,10 @@ NodeSnap-UI is a modern and responsive frontend user interface for the NodeSnap 
 ## 🧿 Favicon
 
 ✅ Custom favicon.ico added.
+
+## 🔧 Environment Configuration
+
+✅ .env and @t3-oss/env-nextjs setup done
 
 ## Getting Started
 
