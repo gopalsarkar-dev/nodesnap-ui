@@ -3,7 +3,6 @@ import { Data, DirectusResponse, SignupFormType } from "@/lib/type";
 import { HTTPError } from "ky";
 
 const signUp = async (sInfo: SignupFormType) => {
-	// console.log(sInfo);
 	try {
 		const { data } = await kyClient
 			.get(`users`, {
@@ -33,7 +32,6 @@ const signUp = async (sInfo: SignupFormType) => {
 				message: `${sInfo.email} already exists`,
 			};
 		}
-		console.log(data);
 	} catch (error) {
 		if (error instanceof HTTPError) {
 			const respos = await error.response.json<{
