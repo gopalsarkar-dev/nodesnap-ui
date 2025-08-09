@@ -15,3 +15,8 @@ export const reValidateTageProfile = async () => {
 	revalidatePath("/profile");
 	revalidateTag("update-ProfileAvater");
 };
+
+export const reValidateDeleteAvatar = async () => {
+	revalidatePath("/profile");
+	revalidateTag("deleteAvatar");
+};

@@ -1,15 +1,19 @@
 "use client";
 
+import { clientEnv } from "@/lib/env/clientEnv";
+import { UserProfileType } from "@/lib/type";
+import { Close } from "@radix-ui/react-dialog";
 import Image from "next/image";
 import { useState } from "react";
-import { useFilePicker } from "use-file-picker";
-import { Button } from "../ui/button";
-import updateProfileAvater from "../hooks/updateProfileAvater";
-import { UserProfileType } from "@/lib/type";
 import { toast } from "react-toastify";
-import { clientEnv } from "@/lib/env/clientEnv";
-import { Close } from "@radix-ui/react-dialog";
-import { reValidateTageProfile } from "../hooks/action/actions";
+import { useFilePicker } from "use-file-picker";
+import {
+	reValidateDeleteAvatar,
+	reValidateTageProfile,
+} from "../hooks/action/actions";
+import deleteAvatar from "../hooks/deleteAvatar";
+import updateProfileAvater from "../hooks/updateProfileAvater";
+import { Button } from "../ui/button";
 
 type ProfileProviderProps = {
 	proInfo: UserProfileType;
@@ -46,6 +50,22 @@ const EditProfileAvater = ({ proInfo }: ProfileProviderProps) => {
 			toast.success(message);
 
 			await reValidateTageProfile();
+		}
+	};
+
+	// avatar delet function
+
+	const deleteAvatarFn = async () => {
+		const { message, success } = await deleteAvatar(proInfo.avatar);
+
+		if (!success) {
+			toast.error(message);
+		}
+
+		if (success) {
+			toast.success(message);
+
+			await reValidateDeleteAvatar();
 		}
 	};
 
@@ -104,7 +124,15 @@ const EditProfileAvater = ({ proInfo }: ProfileProviderProps) => {
 			) : (
 				<>
 					<div className="mt-6">
-						<Button className="cursor-pointer">Remove Avatar</Button>
+						{proInfo.avatar && proInfo.avatar !== "/node.jpg" && (
+							<Close asChild>
+								<Button
+									className="cursor-pointer"
+									onClick={deleteAvatarFn}>
+									Remove Avatar
+								</Button>
+							</Close>
+						)}
 					</div>
 				</>
 			)}
