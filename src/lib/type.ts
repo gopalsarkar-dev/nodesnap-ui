@@ -18,3 +18,19 @@ export type DirectusResponse<D> = {
 export type Data = {
 	data: string;
 };
+
+export type UserProfileType = {
+	id: string;
+
+	first_name: string;
+
+	last_name: null | string;
+
+	title: null | string;
+
+	description: null | string;
+
+	tags: null | string;
+
+	avatar: null | string;
+};

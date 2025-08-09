@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidatePath, revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
 
 export const redirectToLogin = async () => {
@@ -8,4 +9,9 @@ export const redirectToLogin = async () => {
 
 export const redirectToHomepage = async () => {
 	redirect("/");
+};
+
+export const reValidateTageProfile = async () => {
+	revalidatePath("/profile");
+	revalidateTag("update-ProfileAvater");
 };

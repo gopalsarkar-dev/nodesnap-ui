@@ -1,4 +1,3 @@
-"use client";
 import { User } from "lucide-react";
 import { IoCloseOutline } from "react-icons/io5";
 import { Button } from "../ui/button";
@@ -13,8 +12,13 @@ import {
 } from "../ui/drawer";
 import EditProfileAvater from "./EditProfileAvater";
 import ProfileAccountForm from "./ProfileAccountForm";
+import getAuthProfile from "../hooks/getAuthProfile";
 
-const EditProfileDrawer = () => {
+const EditProfileDrawer = async () => {
+	const { data } = await getAuthProfile();
+	if (data === null) {
+		return <></>;
+	}
 	return (
 		<>
 			<Drawer>
@@ -48,11 +52,10 @@ const EditProfileDrawer = () => {
 							<ProfileAccountForm />
 							<div className="text-lg font-bold">Edit Profile Avater</div>
 							<div className="grid place-items-center pb-24">
-								<EditProfileAvater />
+								<EditProfileAvater proInfo={data} />
 							</div>
 						</div>
 					</div>
-					{/* <DrawerFooter className="pb-10"></DrawerFooter> */}
 				</DrawerContent>
 			</Drawer>
 		</>

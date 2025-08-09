@@ -1,3 +1,4 @@
+import getAuthProfile from "@/components/hooks/getAuthProfile";
 import UserProfile from "@/components/profile/UserProfile";
 import { Metadata } from "next";
 
@@ -16,7 +17,8 @@ export const generateMetadata: () => Metadata = () => ({
 	],
 });
 
-const page = () => {
+const page = async () => {
+	await getAuthProfile();
 	return (
 		<>
 			<UserProfile />
