@@ -12,6 +12,8 @@ const UserProfile = async () => {
 
 	const avatarUrl = `${clientEnv.NEXT_PUBLIC_DATABASE_API_URL}/assets/${data.avatar}`;
 
+	const last_name = `${data.last_name === null ? "" : data.last_name}`;
+
 	return (
 		<>
 			<Card>
@@ -25,11 +27,9 @@ const UserProfile = async () => {
 							className="h-[150px] rounded-full object-cover"
 						/>
 						<div className="flex flex-col gap-2">
-							<div className="text-lg font-bold sm:text-2xl">Gopal Sarkar</div>
+							<div className="text-lg font-bold sm:text-2xl">{`${data.first_name} ${last_name}`}</div>
 							<div className="line-clamp-2 text-sm sm:text-base">
-								Bio : Full-stack developer with a focus on building modern web
-								apps using Next.js, React, and Node.js. Experienced in working
-								with Directus, Prisma, and real-time technologies.
+								Bio : {data.description}
 							</div>
 							<div className="flex">
 								<EditProfileDrawer />

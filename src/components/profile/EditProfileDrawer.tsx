@@ -49,7 +49,7 @@ const EditProfileDrawer = async () => {
 						</div>
 
 						<div className="space-y-5 overflow-y-auto px-6">
-							<ProfileAccountForm />
+							<ProfileAccountForm aInfo={data} />
 							<div className="text-lg font-bold">Edit Profile Avater</div>
 							<div className="grid place-items-center pb-24">
 								<EditProfileAvater proInfo={data} />
