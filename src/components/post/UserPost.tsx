@@ -19,6 +19,7 @@ import {
 	FormMessage,
 } from "../ui/form";
 import { Input } from "../ui/input";
+import { Close } from "@radix-ui/react-dialog";
 
 const UserPost = () => {
 	const [isFile, setIsfile] = useState(false);
@@ -58,7 +59,7 @@ const UserPost = () => {
 				<form
 					onSubmit={lForm.handleSubmit(handelPostFn)}
 					className="grid place-items-center">
-					<Card className="sm:w-[350px]">
+					<Card>
 						<CardContent className="space-y-5">
 							<FormField
 								control={lForm.control}
@@ -86,9 +87,9 @@ const UserPost = () => {
 									<Image
 										src="/uplode.jpg"
 										alt="uplode"
-										height={320}
-										width={320}
-										className="h-[320px] cursor-pointer rounded-lg object-cover"
+										height={250}
+										width={250}
+										className="h-[250px] w-[400px] cursor-pointer rounded-lg object-cover"
 									/>
 								</div>
 							)}
@@ -100,42 +101,36 @@ const UserPost = () => {
 									<Image
 										alt={file.name}
 										src={file.content}
-										height={320}
-										width={320}
-										className="h-[320px] rounded-lg object-cover"
+										height={250}
+										width={250}
+										className="h-[250px] w-[400px] rounded-lg object-cover"
 									/>
 								</div>
 							))}
 						</CardContent>
 
-						{isFile ? (
+						{isFile && (
 							<CardFooter className="grid gap-2">
-								<Button
-									disabled={
-										lForm.formState.isSubmitting ||
-										(!lForm.watch("post_title") && !isFile)
-									}
-									type="submit"
-									className="w-full cursor-pointer">
-									Post
-								</Button>
-								<Button
-									onClick={hndelCancelPost}
-									className="w-full cursor-pointer">
-									Cancel Post
-								</Button>
-							</CardFooter>
-						) : (
-							<CardFooter className="grid gap-2">
-								<Button
-									disabled={
-										lForm.formState.isSubmitting ||
-										(!lForm.watch("post_title") && !isFile)
-									}
-									type="submit"
-									className="w-full cursor-pointer">
-									Post
-								</Button>
+								<Close asChild>
+									<Button
+										disabled={
+											lForm.formState.isSubmitting &&
+											lForm.formState.isValid &&
+											!isFile
+										}
+										type="submit"
+										className="w-full cursor-pointer">
+										Post
+									</Button>
+								</Close>
+								<Close asChild>
+									<Button
+										disabled={lForm.formState.isSubmitting && !isFile}
+										onClick={hndelCancelPost}
+										className="w-full cursor-pointer">
+										Cancel Post
+									</Button>
+								</Close>
 							</CardFooter>
 						)}
 					</Card>
