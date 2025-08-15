@@ -20,6 +20,9 @@ import {
 } from "../ui/form";
 import { Input } from "../ui/input";
 import { Close } from "@radix-ui/react-dialog";
+import feedPost from "../hooks/post/feedPost";
+import { toast } from "react-toastify";
+import { redirectToHomepage } from "../hooks/action/actions";
 
 const UserPost = () => {
 	const [isFile, setIsfile] = useState(false);
@@ -40,12 +43,17 @@ const UserPost = () => {
 		mode: "all",
 	});
 
-	const handelPostFn = (pInfo: UserpostType) => {
-		const formData = new FormData();
+	const handelPostFn = async (pInfo: UserpostType) => {
+		const { message, success } = await feedPost(pInfo, plainFiles[0]);
+		if (!success) {
+			toast.error(message);
+		}
 
-		formData.append("image", plainFiles[0]);
-		console.log(plainFiles[0], pInfo);
-		// console.log(pInfo);
+		if (success) {
+			toast.success(message);
+
+			await redirectToHomepage();
+		}
 	};
 
 	const hndelCancelPost = () => {
@@ -113,11 +121,6 @@ const UserPost = () => {
 							<CardFooter className="grid gap-2">
 								<Close asChild>
 									<Button
-										disabled={
-											lForm.formState.isSubmitting &&
-											lForm.formState.isValid &&
-											!isFile
-										}
 										type="submit"
 										className="w-full cursor-pointer">
 										Post
@@ -125,7 +128,6 @@ const UserPost = () => {
 								</Close>
 								<Close asChild>
 									<Button
-										disabled={lForm.formState.isSubmitting && !isFile}
 										onClick={hndelCancelPost}
 										className="w-full cursor-pointer">
 										Cancel Post

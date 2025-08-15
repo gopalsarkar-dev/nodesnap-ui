@@ -1,4 +1,5 @@
 import FeedCard from "@/components/Feed/FeedCard";
+import getAllFeedPost from "@/components/hooks/post/getAllFeedPost";
 import type { Metadata } from "next";
 
 export const generateMetadata: () => Metadata = () => ({
@@ -16,14 +17,22 @@ export const generateMetadata: () => Metadata = () => ({
 	],
 });
 
-const page = () => {
+const page = async () => {
+	const { data } = await getAllFeedPost();
+	if (data === null) {
+		return <></>;
+	}
 	return (
 		<>
 			<div className="grid gap-6">
-				<FeedCard />
-				<FeedCard />
-				<FeedCard />
-				<FeedCard />
+				{data.map((items) => {
+					return (
+						<FeedCard
+							fInfo={items}
+							key={items.id}
+						/>
+					);
+				})}
 			</div>
 		</>
 	);

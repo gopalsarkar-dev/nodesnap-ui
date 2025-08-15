@@ -6,8 +6,15 @@ import {
 	CardHeader,
 	CardTitle,
 } from "../ui/card";
+import { PostType } from "@/lib/type";
+import { clientEnv } from "@/lib/env/clientEnv";
 
-const FeedCard = () => {
+type FeedProps = {
+	fInfo: PostType;
+};
+
+const FeedCard = ({ fInfo }: FeedProps) => {
+	const imgUrl = `${clientEnv.NEXT_PUBLIC_DATABASE_API_URL}/assets/${fInfo.post_img}`;
 	return (
 		<>
 			<Card>
@@ -23,18 +30,15 @@ const FeedCard = () => {
 
 						<div className="font-bold">Ram Sarkar</div>
 					</CardTitle>
-					<CardDescription>
-						Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quis,
-						tempore ullam. Provident.Quis, tempore ullam. Provident.
-					</CardDescription>
+					<CardDescription>{fInfo.post_title}</CardDescription>
 				</CardHeader>
 				<CardContent>
 					<Image
-						src={"/node.jpg"}
-						alt="node"
-						width={1024}
+						src={imgUrl}
+						alt={fInfo.id}
+						width={300}
 						height={300}
-						className="rounded-md"
+						className="h-[300px] w-[1000px] rounded-md object-cover"
 					/>
 				</CardContent>
 			</Card>

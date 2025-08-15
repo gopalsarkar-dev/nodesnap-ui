@@ -34,3 +34,13 @@ export type UserProfileType = {
 
 	avatar: null | string;
 };
+
+export type PostType = {
+	id: string;
+
+	user_created: string;
+
+	post_title: string;
+
+	post_img: string;
+};

@@ -8,6 +8,7 @@ export const redirectToLogin = async () => {
 };
 
 export const redirectToHomepage = async () => {
+	revalidateTag("getAllFeedPost");
 	redirect("/");
 };
 
