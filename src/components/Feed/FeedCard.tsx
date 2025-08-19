@@ -9,6 +9,8 @@ import {
 import { PostType } from "@/lib/type";
 import { clientEnv } from "@/lib/env/clientEnv";
 import singleUserId from "../hooks/post/singleUserId";
+import getAuthProfile from "../hooks/getAuthProfile";
+import Link from "next/link";
 
 type FeedProps = {
 	fInfo: PostType;
@@ -17,7 +19,10 @@ type FeedProps = {
 const FeedCard = async ({ fInfo }: FeedProps) => {
 	const { data } = await singleUserId(fInfo.user_created);
 
-	if (data === null) {
+	//  Get current logged-in user
+	const { data: currentUser } = await getAuthProfile();
+
+	if (data === null || currentUser === null) {
 		return <></>;
 	}
 
@@ -27,21 +32,27 @@ const FeedCard = async ({ fInfo }: FeedProps) => {
 
 	const imgUrl = `${clientEnv.NEXT_PUBLIC_DATABASE_API_URL}/assets/${fInfo.post_img}`;
 
+	// publick profile page-link
+	const publickProfile =
+		currentUser.id === data.id ? "/profile" : `/publick-profile/${data.id}`;
+
 	return (
 		<>
 			<Card>
 				<CardHeader className="flex flex-col gap-0.5">
-					<CardTitle className="flex items-center justify-center gap-3">
-						<Image
-							src={data.avatar ? `${avatarUrl}` : "/node.jpg"}
-							alt="node"
-							width={60}
-							height={60}
-							className="h-[60px] rounded-full object-cover"
-						/>
+					<Link href={publickProfile}>
+						<CardTitle className="flex items-center justify-center gap-3">
+							<Image
+								src={data.avatar ? `${avatarUrl}` : "/node.jpg"}
+								alt="node"
+								width={60}
+								height={60}
+								className="h-[60px] rounded-full object-cover"
+							/>
 
-						<div className="font-bold">{`${data.first_name} ${last_name}`}</div>
-					</CardTitle>
+							<div className="font-bold">{`${data.first_name} ${last_name}`}</div>
+						</CardTitle>
+					</Link>
 					<CardDescription>{fInfo.post_title}</CardDescription>
 				</CardHeader>
 				<CardContent>
