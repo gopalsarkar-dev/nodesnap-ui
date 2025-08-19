@@ -1,6 +1,6 @@
 "use client";
 
-import { EditProfileType } from "@/lib/type";
+import { EditProfileType, UserProfileType } from "@/lib/type";
 import { editProfileSchema } from "@/lib/zodSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -22,21 +22,37 @@ import {
 	FormMessage,
 } from "../ui/form";
 import { Input } from "../ui/input";
+import profileAccountUpdate from "../hooks/profileAccountUpdate";
+import { toast } from "react-toastify";
+import { Close } from "@radix-ui/react-dialog";
+import { reValidateTageProfile } from "../hooks/action/actions";
 
-const ProfileAccountForm = () => {
+type AccountProps = {
+	aInfo: UserProfileType;
+};
+
+const ProfileAccountForm = ({ aInfo }: AccountProps) => {
 	const lForm = useForm<EditProfileType>({
 		resolver: zodResolver(editProfileSchema),
 		defaultValues: {
-			first_name: "Gopal",
-			last_name: "Sarkar",
-			description: "Hi i am Gopal sarkar, Full-Stack Developer",
-			tags: "DEV",
+			first_name: aInfo.first_name,
+			last_name: aInfo.last_name ? aInfo.last_name : "",
+			description: aInfo.description ? aInfo.description : "",
+			tags: aInfo.tags ? aInfo.tags : "",
 		},
 		mode: "all",
 	});
 
-	const handelLoginFn = (eInfo: EditProfileType) => {
-		console.log(eInfo);
+	const handelLoginFn = async (eInfo: EditProfileType) => {
+		const { message, success } = await profileAccountUpdate(eInfo);
+		if (!success) {
+			toast.error(message);
+		}
+
+		if (success) {
+			toast.success(message);
+			await reValidateTageProfile();
+		}
 	};
 
 	return (
@@ -58,6 +74,7 @@ const ProfileAccountForm = () => {
 											<FormLabel>First_name</FormLabel>
 											<FormControl>
 												<Input
+													placeholder="update your first_name"
 													type="text"
 													{...field}
 												/>
@@ -75,6 +92,7 @@ const ProfileAccountForm = () => {
 											<FormLabel>Lirst_name</FormLabel>
 											<FormControl>
 												<Input
+													placeholder="update your last_name"
 													type="text"
 													{...field}
 												/>
@@ -91,6 +109,7 @@ const ProfileAccountForm = () => {
 											<FormLabel>Tags name</FormLabel>
 											<FormControl>
 												<Input
+													placeholder="update your tags_name"
 													type="text"
 													{...field}
 												/>
@@ -107,6 +126,7 @@ const ProfileAccountForm = () => {
 											<FormLabel>Description</FormLabel>
 											<FormControl>
 												<Input
+													placeholder="update your description"
 													type="text"
 													{...field}
 												/>
@@ -117,11 +137,13 @@ const ProfileAccountForm = () => {
 								/>
 							</CardContent>
 							<CardFooter className="grid gap-2">
-								<Button
-									type="submit"
-									className="w-full cursor-pointer">
-									Update
-								</Button>
+								<Close asChild>
+									<Button
+										type="submit"
+										className="w-full cursor-pointer">
+										Update
+									</Button>
+								</Close>
 							</CardFooter>
 						</Card>
 					</form>

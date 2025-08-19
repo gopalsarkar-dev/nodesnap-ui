@@ -1,3 +1,5 @@
+import CurrentUserPostCard from "@/components/Feed/CurrentUserPostCard";
+import getAuthProfile from "@/components/hooks/getAuthProfile";
 import UserProfile from "@/components/profile/UserProfile";
 import { Metadata } from "next";
 
@@ -16,10 +18,17 @@ export const generateMetadata: () => Metadata = () => ({
 	],
 });
 
-const page = () => {
+const page = async () => {
+	await getAuthProfile();
 	return (
 		<>
-			<UserProfile />
+			<div className="space-y-6">
+				<UserProfile />
+				<hr />
+				<div className="mt-6 space-y-6">
+					<CurrentUserPostCard />
+				</div>
+			</div>
 		</>
 	);
 };

@@ -19,6 +19,10 @@ import {
 	FormMessage,
 } from "../ui/form";
 import { Input } from "../ui/input";
+import { Close } from "@radix-ui/react-dialog";
+import feedPost from "../hooks/post/feedPost";
+import { toast } from "react-toastify";
+import { redirectToHomepage } from "../hooks/action/actions";
 
 const UserPost = () => {
 	const [isFile, setIsfile] = useState(false);
@@ -39,12 +43,17 @@ const UserPost = () => {
 		mode: "all",
 	});
 
-	const handelPostFn = (pInfo: UserpostType) => {
-		const formData = new FormData();
+	const handelPostFn = async (pInfo: UserpostType) => {
+		const { message, success } = await feedPost(pInfo, plainFiles[0]);
+		if (!success) {
+			toast.error(message);
+		}
 
-		formData.append("image", plainFiles[0]);
-		console.log(plainFiles[0], pInfo);
-		// console.log(pInfo);
+		if (success) {
+			toast.success(message);
+
+			await redirectToHomepage();
+		}
 	};
 
 	const hndelCancelPost = () => {
@@ -58,7 +67,7 @@ const UserPost = () => {
 				<form
 					onSubmit={lForm.handleSubmit(handelPostFn)}
 					className="grid place-items-center">
-					<Card className="sm:w-[350px]">
+					<Card>
 						<CardContent className="space-y-5">
 							<FormField
 								control={lForm.control}
@@ -86,9 +95,9 @@ const UserPost = () => {
 									<Image
 										src="/uplode.jpg"
 										alt="uplode"
-										height={320}
-										width={320}
-										className="h-[320px] cursor-pointer rounded-lg object-cover"
+										height={250}
+										width={250}
+										className="h-[250px] w-[400px] cursor-pointer rounded-lg object-cover"
 									/>
 								</div>
 							)}
@@ -100,42 +109,30 @@ const UserPost = () => {
 									<Image
 										alt={file.name}
 										src={file.content}
-										height={320}
-										width={320}
-										className="h-[320px] rounded-lg object-cover"
+										height={250}
+										width={250}
+										className="h-[250px] w-[400px] rounded-lg object-cover"
 									/>
 								</div>
 							))}
 						</CardContent>
 
-						{isFile ? (
+						{isFile && (
 							<CardFooter className="grid gap-2">
-								<Button
-									disabled={
-										lForm.formState.isSubmitting ||
-										(!lForm.watch("post_title") && !isFile)
-									}
-									type="submit"
-									className="w-full cursor-pointer">
-									Post
-								</Button>
-								<Button
-									onClick={hndelCancelPost}
-									className="w-full cursor-pointer">
-									Cancel Post
-								</Button>
-							</CardFooter>
-						) : (
-							<CardFooter className="grid gap-2">
-								<Button
-									disabled={
-										lForm.formState.isSubmitting ||
-										(!lForm.watch("post_title") && !isFile)
-									}
-									type="submit"
-									className="w-full cursor-pointer">
-									Post
-								</Button>
+								<Close asChild>
+									<Button
+										type="submit"
+										className="w-full cursor-pointer">
+										Post
+									</Button>
+								</Close>
+								<Close asChild>
+									<Button
+										onClick={hndelCancelPost}
+										className="w-full cursor-pointer">
+										Cancel Post
+									</Button>
+								</Close>
 							</CardFooter>
 						)}
 					</Card>

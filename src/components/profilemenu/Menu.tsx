@@ -1,6 +1,10 @@
-"use client";
-
+import { clientEnv } from "@/lib/env/clientEnv";
+import { User } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
+import getAuthProfile from "../hooks/getAuthProfile";
+import UserLogout from "../logout/UserLogout";
+import DarkMode from "../theme/DarkMode";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -10,21 +14,27 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import DarkMode from "../theme/DarkMode";
-import { User } from "lucide-react";
-import UserLogout from "../logout/UserLogout";
 
-const Menu = () => {
+const Menu = async () => {
+	const { data } = await getAuthProfile();
+	if (data === null) {
+		return <></>;
+	}
+
+	const avatarUrl = `${clientEnv.NEXT_PUBLIC_DATABASE_API_URL}/assets/${data.avatar}`;
 	return (
 		<>
 			<DropdownMenu>
 				<DropdownMenuTrigger
 					asChild
 					className="cursor-pointer">
-					<div className="">
-						Ram
-						{/* <UserProfile /> */}
-					</div>
+					<Image
+						src={data.avatar ? `${avatarUrl}` : "/node.jpg"}
+						alt="favicon.ico"
+						height={40}
+						width={40}
+						className="h-[40px] rounded-full object-cover"
+					/>
 				</DropdownMenuTrigger>
 				<DropdownMenuContent
 					className="mt-6 w-56"

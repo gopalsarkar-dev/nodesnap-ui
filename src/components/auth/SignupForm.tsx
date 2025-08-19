@@ -23,6 +23,9 @@ import {
 	FormMessage,
 } from "../ui/form";
 import { Input } from "../ui/input";
+import signUp from "../hooks/signUp";
+import { toast } from "react-toastify";
+import { redirectToLogin } from "../hooks/action/actions";
 
 const SignupForm = () => {
 	const lForm = useForm<SignupFormType>({
@@ -31,9 +34,19 @@ const SignupForm = () => {
 		mode: "all",
 	});
 
-	const handelSignupFn = (sInfo: SignupFormType) => {
-		console.log(sInfo);
-		lForm.reset();
+	const handelSignupFn = async (sInfo: SignupFormType) => {
+		const { message, success } = await signUp(sInfo);
+		if (!success) {
+			toast.error(message);
+		}
+
+		if (success) {
+			toast.success(message);
+			lForm.reset();
+			await redirectToLogin();
+		}
+
+		// console.log(sInfo);
 	};
 
 	return (

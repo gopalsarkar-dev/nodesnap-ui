@@ -24,6 +24,9 @@ import {
 	FormLabel,
 	FormMessage,
 } from "../ui/form";
+import logIn from "../hooks/logIn";
+import { toast } from "react-toastify";
+import { redirectToHomepage } from "../hooks/action/actions";
 
 const LoginForm = () => {
 	const lForm = useForm<LoginFormType>({
@@ -32,8 +35,18 @@ const LoginForm = () => {
 		mode: "all",
 	});
 
-	const handelLoginFn = (lInfo: LoginFormType) => {
-		console.log(lInfo);
+	const handelLoginFn = async (lInfo: LoginFormType) => {
+		const { message, success } = await logIn(lInfo);
+
+		if (!success) {
+			toast.error(message);
+		}
+
+		if (success) {
+			toast.success(message);
+			lForm.reset();
+			await redirectToHomepage();
+		}
 	};
 
 	return (

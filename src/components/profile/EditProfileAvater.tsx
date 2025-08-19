@@ -1,11 +1,25 @@
 "use client";
 
+import { clientEnv } from "@/lib/env/clientEnv";
+import { UserProfileType } from "@/lib/type";
+import { Close } from "@radix-ui/react-dialog";
 import Image from "next/image";
 import { useState } from "react";
+import { toast } from "react-toastify";
 import { useFilePicker } from "use-file-picker";
+import {
+	reValidateDeleteAvatar,
+	reValidateTageProfile,
+} from "../hooks/action/actions";
+import deleteAvatar from "../hooks/deleteAvatar";
+import updateProfileAvater from "../hooks/updateProfileAvater";
 import { Button } from "../ui/button";
 
-const EditProfileAvater = () => {
+type ProfileProviderProps = {
+	proInfo: UserProfileType;
+};
+
+const EditProfileAvater = ({ proInfo }: ProfileProviderProps) => {
 	const [isFile, setIsfile] = useState(false);
 
 	const { plainFiles, filesContent, openFilePicker, clear } = useFilePicker({
@@ -22,12 +36,40 @@ const EditProfileAvater = () => {
 		setIsfile(false);
 	};
 
-	const updateAvatarFn = () => {
-		const formData = new FormData();
+	const updateAvatarFn = async () => {
+		const { message, success } = await updateProfileAvater(
+			proInfo.avatar,
+			plainFiles[0],
+		);
 
-		formData.append("image", plainFiles[0]);
-		console.log(plainFiles[0]);
+		if (!success) {
+			toast.error(message);
+		}
+
+		if (success) {
+			toast.success(message);
+
+			await reValidateTageProfile();
+		}
 	};
+
+	// avatar delet function
+
+	const deleteAvatarFn = async () => {
+		const { message, success } = await deleteAvatar(proInfo.avatar);
+
+		if (!success) {
+			toast.error(message);
+		}
+
+		if (success) {
+			toast.success(message);
+
+			await reValidateDeleteAvatar();
+		}
+	};
+
+	const avatarUrl = `${clientEnv.NEXT_PUBLIC_DATABASE_API_URL}/assets/${proInfo.avatar}`;
 
 	return (
 		<>
@@ -37,11 +79,11 @@ const EditProfileAvater = () => {
 						className="grid cursor-pointer place-items-center"
 						onClick={openFilePicker}>
 						<Image
-							src="/favicon.ico"
-							alt="favicon.ico"
+							src={proInfo.avatar ? `${avatarUrl}` : "/node.jpg"}
+							alt={proInfo.first_name}
 							height={150}
 							width={150}
-							className="rounded-full object-cover"
+							className="h-[150px] rounded-full object-cover"
 						/>
 					</button>
 				</>
@@ -56,7 +98,7 @@ const EditProfileAvater = () => {
 						src={file.content}
 						height={150}
 						width={150}
-						className="h-[150px] w-[150px] rounded-full object-cover"
+						className="h-[150px] rounded-full object-cover"
 					/>
 					<br />
 				</div>
@@ -65,11 +107,13 @@ const EditProfileAvater = () => {
 			{isFile ? (
 				<>
 					<div className="flex gap-4">
-						<Button
-							className="cursor-pointer"
-							onClick={updateAvatarFn}>
-							update Avatar
-						</Button>
+						<Close asChild>
+							<Button
+								className="cursor-pointer"
+								onClick={updateAvatarFn}>
+								update Avatar
+							</Button>
+						</Close>
 						<Button
 							onClick={discardAvatarFn}
 							className="cursor-pointer">
@@ -80,7 +124,15 @@ const EditProfileAvater = () => {
 			) : (
 				<>
 					<div className="mt-6">
-						<Button className="cursor-pointer">Remove Avatar</Button>
+						{proInfo.avatar && proInfo.avatar !== "/node.jpg" && (
+							<Close asChild>
+								<Button
+									className="cursor-pointer"
+									onClick={deleteAvatarFn}>
+									Remove Avatar
+								</Button>
+							</Close>
+						)}
 					</div>
 				</>
 			)}
