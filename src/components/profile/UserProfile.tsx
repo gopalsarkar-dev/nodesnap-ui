@@ -1,8 +1,8 @@
+import { clientEnv } from "@/lib/env/clientEnv";
 import Image from "next/image";
+import getAuthProfile from "../hooks/getAuthProfile";
 import { Card, CardHeader, CardTitle } from "../ui/card";
 import EditProfileDrawer from "./EditProfileDrawer";
-import getAuthProfile from "../hooks/getAuthProfile";
-import { clientEnv } from "@/lib/env/clientEnv";
 
 const UserProfile = async () => {
 	const { data } = await getAuthProfile();
