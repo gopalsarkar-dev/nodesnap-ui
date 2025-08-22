@@ -5,6 +5,9 @@ import { signupFormSchema } from "@/lib/zodSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
+import { redirectToLogin } from "../hooks/action/actions";
+import signUp from "../hooks/signUp";
 import { Button } from "../ui/button";
 import {
 	Card,
@@ -23,9 +26,6 @@ import {
 	FormMessage,
 } from "../ui/form";
 import { Input } from "../ui/input";
-import signUp from "../hooks/signUp";
-import { toast } from "react-toastify";
-import { redirectToLogin } from "../hooks/action/actions";
 
 const SignupForm = () => {
 	const lForm = useForm<SignupFormType>({
