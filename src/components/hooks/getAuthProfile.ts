@@ -1,3 +1,4 @@
+import { serverEnv } from "@/lib/env/serverEnv";
 import kyServer from "@/lib/ky/kyServer";
 import { DirectusResponse, UserProfileType } from "@/lib/type";
 
@@ -6,7 +7,7 @@ import { cookies } from "next/headers";
 
 const getAuthProfile = async () => {
 	try {
-		const token = (await cookies()).get("directus_session_token")
+		const token = (await cookies()).get(serverEnv.SESSION_COOKIE_NAME)
 			?.value as string;
 
 		const { data } = await kyServer
