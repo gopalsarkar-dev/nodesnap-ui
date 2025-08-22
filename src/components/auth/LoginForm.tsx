@@ -51,7 +51,7 @@ const LoginForm = () => {
 
 	return (
 		<>
-			<div className="grid h-[85dvh] place-items-center">
+			<div className="grid h-[80dvh] place-items-center">
 				<Form {...lForm}>
 					<form onSubmit={lForm.handleSubmit(handelLoginFn)}>
 						<Card className="w-[320px]">
