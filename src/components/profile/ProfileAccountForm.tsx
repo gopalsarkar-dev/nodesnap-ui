@@ -3,7 +3,11 @@
 import { EditProfileType, UserProfileType } from "@/lib/type";
 import { editProfileSchema } from "@/lib/zodSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Close } from "@radix-ui/react-dialog";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
+import { reValidateTageProfile } from "../hooks/action/actions";
+import profileAccountUpdate from "../hooks/profileAccountUpdate";
 import { Button } from "../ui/button";
 import {
 	Card,
@@ -22,10 +26,6 @@ import {
 	FormMessage,
 } from "../ui/form";
 import { Input } from "../ui/input";
-import profileAccountUpdate from "../hooks/profileAccountUpdate";
-import { toast } from "react-toastify";
-import { Close } from "@radix-ui/react-dialog";
-import { reValidateTageProfile } from "../hooks/action/actions";
 
 type AccountProps = {
 	aInfo: UserProfileType;

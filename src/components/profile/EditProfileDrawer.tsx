@@ -1,5 +1,6 @@
 import { User } from "lucide-react";
 import { IoCloseOutline } from "react-icons/io5";
+import getAuthProfile from "../hooks/getAuthProfile";
 import { Button } from "../ui/button";
 import {
 	Drawer,
@@ -12,7 +13,6 @@ import {
 } from "../ui/drawer";
 import EditProfileAvater from "./EditProfileAvater";
 import ProfileAccountForm from "./ProfileAccountForm";
-import getAuthProfile from "../hooks/getAuthProfile";
 
 const EditProfileDrawer = async () => {
 	const { data } = await getAuthProfile();

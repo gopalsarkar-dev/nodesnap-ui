@@ -5,6 +5,7 @@ export const serverEnv = createEnv({
 	server: {
 		DATABASE_API_URL: z.url({ error: "Invalide Url" }),
 		API_SECRET_KEY: z.string({ error: "Invalide Api Key" }),
+		SESSION_COOKIE_NAME: z.string(),
 	},
 
 	experimental__runtimeEnv: process.env,
