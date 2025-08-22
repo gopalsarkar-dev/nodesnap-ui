@@ -2,46 +2,93 @@
 
 NodeSnap-UI is a modern and responsive frontend user interface for the NodeSnap backend (powered by Directus). It enables users to interact seamlessly with backend services such as file uploads, authentication, UserProfile, etc. Built with Next.js, Tailwind CSS and ShadcnUi
 
-## 📈 Project Status ( Frontend Part – Basically Completed )
+## 📈 Project Status 🛩️
 
-🛩️ ** Currently 50% completed **
+✅ Currently 90% completed
 
-📦 Basic dependencies installed ( ShadCN/UI, Ky, prettier-plugin-tailwindcss, rimraf etc.)
+. 📦 Basic dependencies installed (Shadcn/UI, Ky, Prettier plugin for TailwindCSS, Rimraf, etc.)
 
-✅ Removed unnecessary/unused code and files for a cleaner, faster codebase.
+. ✅ Removed unnecessary/unused code and files for a cleaner, faster codebase..
 
-## 🔗 Navigation:
+## 🔗 Navigation
 
-✅ TopBar / NavBar completed.
+. ✅ TopBar / NavBar implemented with conditional rendering (based on auth state).
 
-## 🔐 Authentication Forms:
+## 🔐 Authentication
 
-✅ LoginForm and SignupForm validation completed.
+. ✅ Login & Signup Forms with validation.
 
-## 👤 User Profile Page:
+. ✅ Directus-based authentication integrated.
 
-✅ Edit user account details (first_name, last_name, bio, tagsname)
-✅ Profile avatar upload & update functionality implemented.
+## 👤 User Profile Page
 
-## 🌙☀️ UI Theme:
+. ✅ Edit user account details (first_name, last_name, bio, tagsname).
 
-✅ Dark Mode support enabled.
+. ✅ Profile avatar upload & update functionality.
 
-## 📰 FeedCard:
+. 🆕 Public profile pages for each user (view other users' profiles and posts).
 
-✅ FeedCard component displays all user posts.
+## 🌙☀️ UI Theme
+
+. ✅ Dark Mode support enabled with smooth toggle.
+
+## 📰 Feed System
+
+. ✅ FeedCard component displays all user posts dynamically.
+
+. ✅ Shows post title, image, and author details.
 
 ## 📝 User Posts
 
-✅ Users can create posts with a title and image upload functionality.
+. ✅ Users can create posts with a title and image upload.
+
+. ✅ Posts linked to user profile.
 
 ## 🧿 Favicon
 
-✅ Custom favicon.ico added.
+. ✅ Custom favicon.ico added.
 
 ## 🔧 Environment Configuration
 
-✅ .env and @t3-oss/env-nextjs setup done
+. ✅ .env and @t3-oss/env-nextjs setup completed.
+
+## 🛠️ Features
+
+. 🔐 Secure Authentication (Login, Signup and Signout).
+
+. 👤 Profile Management (Only login user can delete info, avatar and update info, avatar).
+
+. 📰 User Feed (view all posts in a card-based UI).
+
+. 📝 Create & Upload Posts (with title and image support).
+
+. 🌙 Dark/Light Theme toggle.
+
+. 🧩 Reusable UI components (ShadcnUI).
+
+. ⚡ Fast API requests using Ky HTTP client.
+
+. 🧑‍🤝‍🧑 Public Profile Pages (discover and view other users).
+
+. 🔒 Protected routes
+
+. 🔁 Real-time updates
+
+. 📲 Responsive design
+
+## 🏗️ Tech Stack
+
+. Frontend Framework: Next.js (App Router)
+
+. Styling: Tailwind CSS, Shadcn/UI
+
+. Backend: Directus (Headless CMS)
+
+. Data Fetching: Ky (HTTP Client)
+
+. Validation: @t3-oss/env-nextjs and Zod
+
+. Utilities: Prettier (with TailwindCSS plugin), Rimraf
 
 ## Getting Started
 
