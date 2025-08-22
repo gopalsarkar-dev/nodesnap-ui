@@ -16,6 +16,9 @@ import { Input } from "../ui/input";
 
 import { loginFormSchema } from "@/lib/zodSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from "react-toastify";
+import { redirectToHomepage } from "../hooks/action/actions";
+import logIn from "../hooks/logIn";
 import {
 	Form,
 	FormControl,
@@ -24,9 +27,6 @@ import {
 	FormLabel,
 	FormMessage,
 } from "../ui/form";
-import logIn from "../hooks/logIn";
-import { toast } from "react-toastify";
-import { redirectToHomepage } from "../hooks/action/actions";
 
 const LoginForm = () => {
 	const lForm = useForm<LoginFormType>({
